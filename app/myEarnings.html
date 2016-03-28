@@ -1,1 +1,12 @@
-<h1>{{meCtrl.message}}</h1>
+<div class="myEarningsInfoBoxDiv">
+	<div class="myEarningsInfoBox">
+		<h2>My Earnings Info</h2>
+		<hr />
+		<span class="tipTotal">Tip Total: </span><span ng-show="showMyEarningsBox">{{data.tipTotal | currency}}</span><br />
+		<span class="mealCount">Meal Count: </span><span ng-show="showMyEarningsBox">{{data.mealCount}}</span><br />
+		<span class="avgTipPerMeal">Average Tip Per Meal: </span><span ng-show="showMyEarningsBox">{{computeAvgTip(data.tipTotal, data.mealCount) | currency}}</span>
+	</div>
+</div>
+<div class="resetButton">
+	<button class="resetButton" ng-click="reset()">Reset</button>
+</div>

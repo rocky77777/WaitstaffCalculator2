@@ -1,0 +1,200 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+.mainScreen {
+	width: 1200px;
+	margin: auto;
+}
+
+.titleHeader {
+	font-size: 50pt;
+	text-align: center;
+}
+
+.mealDetailsSide {
+	width: 46%;
+	margin: auto;
+}
+
+.customerAndEarningsSide {
+	width: 46%;
+	margin: auto;
+}
+
+
+/*------------------------
+Meal Details Box
+------------------------*/
+
+.mealDetailsBox {
+	height: 300px;
+	width: 400px;
+	border: 1px solid black;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.mealDetailsBox p {
+	font-size: 18pt;
+	text-align: center;
+	line-height: 50px;
+}
+
+.bmp {
+	margin-left: -4px;
+}
+
+.tr {
+	margin-left: 57px;
+}
+
+.buttons {
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+.buttons button {
+	padding: 5px;
+	font-size: 20pt;
+	margin-left: 40px;
+}
+
+
+/*------------------------
+Customer Charges Box
+------------------------*/
+
+.customerChargesBox {
+	height: 180px;
+	width: 400px;
+	border: 1px solid black;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.ccInfo {
+	width: 70%;
+}
+
+.ccInfo span {
+	font-size: 12pt;
+	line-height: 30px;
+}
+
+.subTotal {
+	margin-left: 30px;
+}
+
+.tip {
+	margin-left: 61px;
+}
+
+.total {
+	margin-left: 50px;
+}
+
+/*------------------------
+My Info Box
+------------------------*/
+.myEarningsInfoBoxDiv {
+	width: 50%;
+	margin: auto;
+}
+.myEarningsInfoBox {
+	height: 180px;
+	width: 300px;
+	border: 1px solid black;
+	margin: auto;
+	margin-top: 40px;
+}
+
+.myEarningsInfoBox span {
+	line-height: 40px;
+	font-size: 12pt;
+}
+
+.tipTotal {
+	margin-left: 92px;
+}
+
+.mealCount {
+	margin-left: 76px;
+}
+
+.avgTipPerMeal {
+	margin-left: 10px;
+}
+
+.resetButton {
+	height: 40px;
+	width: 100px;
+	font-size: 16pt;
+	margin: auto;
+	margin-top: 15px;
+}
+
+hr {
+	clear: both;
+}
+
+h2 {
+	font-size: 18pt;
+	text-align: center;
+	padding-top: 5px;
+}
+
+/*--------------------------------
+beginning routing section style
+--------------------------------*/
+.homePageTitle {
+	font-size: 46pt;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.links {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	font-size: 24pt;
+	padding-bottom: 20px;
+}
+
+.appExplanationParagraphDiv {
+	width: 30%;
+	margin: auto;
+	padding-top: 30px;
+}
+
+.appExplanationParagraph {
+	font-size: 24pt;
+	text-align: justify;
+}
+
+.routeLink {
+	text-decoration: none;
+	padding-right: 10px;
+}
+
+.routeLink:not(:last-child) {
+	border-right: solid black 3px;
+}

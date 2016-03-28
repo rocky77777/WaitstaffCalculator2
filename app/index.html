@@ -5,16 +5,19 @@
 </head>
 <body>
 
-	<h1>Waitstaff Calculator</h1>
-	<a ng-href="#/">Home</a>
-	<a ng-href="#/newMeal">New Meal</a>
-	<a ng-href="#/myEarnings">My Earnings</a>
+	<h1 class="homePageTitle">Waitstaff Calculator</h1>
+	<div class="links">
+		<a ng-href="#/choices/Home" class="routeLink">Home</a>
+		<a ng-href="#/choices/New Meal" class="routeLink">New Meal</a>
+		<a ng-href="#/choices/My Earnings" class="routeLink">My Earnings</a>
+	</div>
 
 	<div ng-view></div>
 
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="wcApp.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 
 </body>
 </html>
