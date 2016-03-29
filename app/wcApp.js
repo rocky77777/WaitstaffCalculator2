@@ -8,43 +8,45 @@ var isEarnings = false;
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 
-	.when('/choices/:choice', {
-		templateUrl : 'theView.html',
-		controller : 'NewMealCtrl',
-		resolve : {
-			choice: function(appChoices, $route, $location) {
-				var choice = $route.current.params.choice;
-				if(appChoices.indexOf(choice) === -1 ) {
-					$location.path('/error');
-					return;
-				}
-				viewChoice = choice;
-				return choice;
-			}
-		}
-	})
+	// .when('/choices/:choice', {
+	// 	templateUrl : 'theView.html',
+	// 	controller : 'newMealCtrl',
+	// 	resolve : {
+	// 		choice: function(appChoices, $route, $location) {
+	// 			var choice = $route.current.params.choice;
+	// 			if(appChoices.indexOf(choice) === -1 ) {
+	// 				$location.path('/error');
+	// 				return;
+	// 			}
+	// 			viewChoice = choice;
+	// 			return choice;
+	// 		}
+	// 	}
+	// })
 
-	// .when('/Home', {
-	// 	templateUrl : 'home.html',
-	// 	controller : 'HomeCtrl as home'
-	// })
-	// .when('/New Meal', {
-	// 	templateUrl : 'newMeal.html',
-	// 	controller : 'NewMealCtrl as nmCtrl'
-	// })
-	// .when('/My Earnings', {
-	// 	templateUrl : 'myEarnings.html',
-	// 	controller : 'MyEarningsCtrl as meCtrl'
-	// })
-.when('/error', {
-	template : '<p>Error - Page Not Found</p>'
-})
-.otherwise('/error');
+	.when('/Home', {
+		templateUrl : 'home.html',
+		controller : 'HomeCtrl as home'
+	})
+	.when('/New Meal', {
+		templateUrl : 'newMeal.html',
+		controller : 'NewMealCtrl as nmCtrl'
+	})
+	.when('/My Earnings', {
+		templateUrl : 'myEarnings.html',
+		// controller : 'MyEarningsCtrl as meCtrl'
+		controller : 'NewMealCtrl as nmCtrl'
+	})
+	.when('/error', {
+		// template : '<p>Error - Page Not Found</p>'
+		templateUrl : 'home.html'
+	})
+	.otherwise('/error');
 }])
 .controller('HomeCtrl', function($scope) {
 	this.message = "Hi from home controller.";
 })
-.controller('NewMealCtrl', function($scope) {
+.controller('NewMealCtrl', function($scope, $rootScope) {
 
 	// if(viewChoice === "Home") {
 	// 	document.getElementById("a").innerHTML = '<div class="appExplanationParagraphDiv"><p class="appExplanationParagraph">This app tracks your earnings as a waiter. To enter a new meal, click the "New Meal" tab and enter the info, then click the submit button. To view your earnings over the entire duration, click the "My Earnings" tab. The rest is self-explanatory.</p></div>';
@@ -58,58 +60,65 @@ app.config(['$routeProvider', function($routeProvider) {
 	// 	isHome = true;
 	// }
 
-	$scope.data = {
-		tipTotal: 0,
-		mealCount: 0,
-		avgTipPerMeal: 0
-	};
-	var subT = 0;
-	var tip = 0;
-	var total = 0;
-	var tipTotal = 0;
-	var mealCount = 0;
-	var avgTipPerMeal = 0;
-	showCustomerChargesBox = false;
-	showMyEarningsBox = false;
-	$scope.submitted = false;
-	$scope.computeSubtotal = function(mealPrice, tax) {
+	// $rootScope.isStarted;
+	console.log($rootScope.isStarted);
+	if(!$rootScope.isStarted) {
+		$rootScope.data = {
+			tipTotal: 0,
+			mealCount: 0,
+			avgTipPerMeal: 0
+		};
+		var subT;
+		var tip;
+		var total;
+		var tipTotal;
+		var mealCount;
+		var avgTipPerMeal;
+		showCustomerChargesBox = false;
+		showMyEarningsBox = false;
+		$rootScope.submitted = false;
+		
+	}
+	
+	$rootScope.computeSubtotal = function(mealPrice, tax) {
 		subT = mealPrice + (mealPrice * (tax / 100));
 		return subT;
 	}
-	$scope.computeTip = function(tipPerc) {
+	$rootScope.computeTip = function(tipPerc) {
 		tip = subT * (tipPerc / 100);
 		return tip;
 	}
-	$scope.computeTotal = function () {
+	$rootScope.computeTotal = function () {
 		total = subT + tip;
 		return total;
 	}
-	$scope.submit = function() {
-		$scope.submitted = true;
+	$rootScope.submit = function() {
+		$rootScope.submitted = true;
 		if($scope.mealDetailsForm.$valid) {
-			$scope.showCustomerChargesBox = true;
-			$scope.showMyEarningsBox = true;
-			$scope.data.tipTotal = $scope.data.tipTotal + tip;
-			$scope.data.mealCount ++;
-			$scope.submitted = false;
+			$rootScope.showCustomerChargesBox = true;
+			$rootScope.showMyEarningsBox = true;
+			$rootScope.data.tipTotal = $rootScope.data.tipTotal + tip;
+			$rootScope.data.mealCount ++;
+			$rootScope.submitted = false;
+			$rootScope.isStarted = true;
 		}
 	}
-	$scope.cancel = function() {
-		$scope.data.basePrice = "";
-		$scope.data.taxRate = "";
-		$scope.data.tipPercentage = "";
-		$scope.showCustomerChargesBox = false;
+	$rootScope.cancel = function() {
+		$rootScope.data.basePrice = "";
+		$rootScope.data.taxRate = "";
+		$rootScope.data.tipPercentage = "";
+		$rootScope.showCustomerChargesBox = false;
 	}
-	$scope.reset = function() {
-		$scope.data.tipTotal = 0;
-		$scope.data.mealCount = 0;
-		$scope.data.basePrice = "";
-		$scope.data.taxRate = "";
-		$scope.data.tipPercentage = ""; 
-		$scope.showCustomerChargesBox = false;
-		$scope.showMyEarningsBox = false;
+	$rootScope.reset = function() {
+		$rootScope.data.tipTotal = 0;
+		$rootScope.data.mealCount = 0;
+		$rootScope.data.basePrice = "";
+		$rootScope.data.taxRate = "";
+		$rootScope.data.tipPercentage = ""; 
+		$rootScope.showCustomerChargesBox = false;
+		$rootScope.showMyEarningsBox = false;
 	}
-	$scope.computeAvgTip = function(totalTip, mealsCount) {
+	$rootScope.computeAvgTip = function(totalTip, mealsCount) {
 		return totalTip / mealsCount;
 	}
 
@@ -130,9 +139,9 @@ app.config(['$routeProvider', function($routeProvider) {
 	// }
 
 })
-.controller('MyEarningsCtrl', function($scope) {
-	this.message = "This is a message from MyEarningsCtrl";
-})
+// .controller('MyEarningsCtrl', function($scope) {
+// 	this.message = "This is a message from MyEarningsCtrl";
+// })
 .value('appChoices', ['Home', 'New Meal', 'My Earnings']);
 
 //put html in js and try to render it using if statement?
