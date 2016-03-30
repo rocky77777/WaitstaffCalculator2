@@ -2,6 +2,7 @@
 <html ng-app="wcApp">
 <head>
 	<title>Waitstaff Calculator App</title>
+	<link rel="stylesheet" type="text/css" href="wcApp.css">
 </head>
 <body>
 
@@ -12,12 +13,14 @@
 		<a ng-href="#/My Earnings" class="routeLink">My Earnings</a>
 	</div>
 
-	<div ng-view></div>
+	<div class="animate-view-container">
+		<div ng-view class="animate-view"></div>
+	</div>
 
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="wcApp.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
-
+	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
 </body>
 </html>

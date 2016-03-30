@@ -1,4 +1,4 @@
-var app = angular.module('wcApp', ['ngRoute']);
+var app = angular.module('wcApp', ['ngRoute', 'ngAnimate']);
 
 var viewChoice;
 var isHome = false;
@@ -35,7 +35,7 @@ app.config(['$routeProvider', function($routeProvider) {
 	.when('/My Earnings', {
 		templateUrl : 'myEarnings.html',
 		// controller : 'MyEarningsCtrl as meCtrl'
-		controller : 'NewMealCtrl as nmCtrl'
+		controller : 'NewMealCtrl as nmCtrl' 
 	})
 	.when('/error', {
 		// template : '<p>Error - Page Not Found</p>'
@@ -60,8 +60,6 @@ app.config(['$routeProvider', function($routeProvider) {
 	// 	isHome = true;
 	// }
 
-	// $rootScope.isStarted;
-	console.log($rootScope.isStarted);
 	if(!$rootScope.isStarted) {
 		$rootScope.data = {
 			tipTotal: 0,
@@ -142,6 +140,18 @@ app.config(['$routeProvider', function($routeProvider) {
 // .controller('MyEarningsCtrl', function($scope) {
 // 	this.message = "This is a message from MyEarningsCtrl";
 // })
-.value('appChoices', ['Home', 'New Meal', 'My Earnings']);
+.value('appChoices', ['Home', 'New Meal', 'My Earnings'])
 
-//put html in js and try to render it using if statement?
+.run(function($rootScope, $location, $timeout) {
+	$rootScope.$on('$routeChangeError', function() {
+		$location.path("/error");
+	});
+	$rootScope.$on('$routeChangeStart', function() {
+		$rootScope.isLoading = true;
+	});
+	$rootScope.$on('$routeChangeSuccess', function() {
+		$timeout(function() {
+			$rootScope.isLoading = false;
+		}, 500);
+	});
+});
